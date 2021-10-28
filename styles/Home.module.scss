@@ -56,7 +56,6 @@
 }
 
 .handles {
-  padding: 0 0 1rem;
   a {
     color: black;
     opacity: 0.6;
@@ -75,5 +74,35 @@
   opacity: 0.6;
   cursor: not-allowed;
   user-select: none;
-  padding: 0 0 1rem;
+}
+
+.repo {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  min-height: 70px;
+  border-radius: 50%;
+  color: white;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  opacity: 0.9;
+  svg {
+    path {
+      fill: white;
+    }
+  }
+  &:hover {
+    background-color: #fff;
+    svg {
+      path {
+        fill: black;
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    margin: 1rem 0;
+  }
 }
