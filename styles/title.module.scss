@@ -1,0 +1,30 @@
+.title {
+  min-width: 50%;
+  color: green;
+  font-weight: bold;
+  opacity: 0.9;
+  font-size: 20px;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid lightgreen;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  .question {
+    margin: 0.2rem;
+    border-radius: 50%;
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    background-color: rgba($color: lightgreen, $alpha: 0.6);
+  }
+}
+.tip {
+  padding: 0.5rem;
+  margin: 0 0.3rem;
+  border-radius: 11px;
+  background-color: #ddfadd;
+  color: green;
+  display: inline-flex;
+  max-width: 200px;
+}
