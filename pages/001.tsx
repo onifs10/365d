@@ -37,6 +37,7 @@ const Day001: NextPage = () => {
       strokeStyle: "green",
       lineWidth: 2,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [reset]
   );
 
