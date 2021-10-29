@@ -1,10 +1,11 @@
-import { NextPage } from "next";
-import { MouseEvent, useEffect, useMemo, useRef, useState } from "react";
-import Styles from "../styles/001.module.scss";
-import { Button } from "@blueprintjs/core";
 import Matter, { Runner } from "matter-js";
-import Head from "next/head";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "@blueprintjs/core";
+import { NextPage } from "next";
 import Title from "../components/WorkTitle";
+import Head from "next/head";
+import Styles from "../styles/001.module.scss";
+import { GoHome } from "../components/Layout";
 
 const {
   Engine,
@@ -16,7 +17,7 @@ const {
   Composite,
   Events,
 } = Matter;
-const Day001: NextPage = () => {
+const Day001: NextPage = (Props) => {
   //====  states =====//
   const divRef = useRef<HTMLDivElement | null>(null);
   const renderRef = useRef<Matter.Render>();
@@ -128,6 +129,7 @@ const Day001: NextPage = () => {
 
   return (
     <>
+      <GoHome />
       <Head>
         <title>Day 001 Stack-Up</title>
         <meta

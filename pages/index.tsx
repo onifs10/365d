@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.scss";
+import Link from "next/link";
+import ROUTES from "../Routes";
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +20,17 @@ const Home: NextPage = () => {
         <p className={styles.description}>
           Exporing javascript and various libraries
         </p>
+
+        <pre className={styles.dayLinks}>
+          {ROUTES.map((item) => (
+            <Link href={item.path} key={item.day} passHref>
+              <span className={styles.link}>
+                <span>{item.day}</span>
+                <span>{item.name}</span>
+              </span>
+            </Link>
+          ))}
+        </pre>
       </main>
       <footer className={styles.footer}>
         <div className={styles.handles}>

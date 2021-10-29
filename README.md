@@ -6,4 +6,4 @@
 
 # **_Day 1_** (Stack Up)
 
-### simple 2d game to stack up boxes [link](https://github.com/onifs10/365d/blob/main/pages/001.tsx)
+### simple 2d game to stack up boxes [link](https://github.com/onifs10/365d/blob/main/pages/001.tsx) using Matter.js

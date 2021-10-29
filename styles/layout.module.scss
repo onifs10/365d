@@ -7,3 +7,12 @@
   align-items: center;
   flex-flow: column;
 }
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.5rem;
+  color: green;
+  cursor: pointer;
+}
