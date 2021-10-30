@@ -2,10 +2,8 @@ import Matter, { Runner } from "matter-js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@blueprintjs/core";
 import { NextPage } from "next";
-import Title from "../components/WorkTitle";
-import Head from "next/head";
 import Styles from "../styles/001.module.scss";
-import { GoHome } from "../components/Layout";
+import Paper from "../components/Paper";
 
 const {
   Engine,
@@ -17,20 +15,22 @@ const {
   Composite,
   Events,
 } = Matter;
-const Day001: NextPage = (Props) => {
+const Paper001: NextPage = (Props) => {
   //====  states =====//
   const divRef = useRef<HTMLDivElement | null>(null);
   const renderRef = useRef<Matter.Render>();
   const [running, setRuning] = useState<boolean>(true);
   const runnerRef = useRef<Matter.Runner>(Runner.create());
   const [reset, setReset] = useState<boolean>(true);
-  // actions to be called in this Componen
+
+  // actions to be called by user interaction
   const actions = useMemo(
     () => ({
       add: (event: Matter.IMouseEvent<Matter.MouseConstraint>) => {},
     }),
     []
   );
+
   //shapes wireframes
   const wireframe = useMemo(
     () => ({
@@ -39,7 +39,7 @@ const Day001: NextPage = (Props) => {
       lineWidth: 2,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [reset]
+    [reset] // i added this so has to trigger re-render to reset canvas
   );
 
   useEffect(() => {
@@ -47,7 +47,6 @@ const Day001: NextPage = (Props) => {
     if (divRef.current) {
       // create and engine
       const engine = Engine.create();
-
       divRef.current.innerHTML = "";
       renderRef.current = Render.create({
         element: divRef.current,
@@ -59,7 +58,6 @@ const Day001: NextPage = (Props) => {
           wireframes: false,
         },
       });
-
       //add slab 1
       const ground = Bodies.rectangle(300, 300, 400, 20, {
         isStatic: true,
@@ -129,40 +127,34 @@ const Day001: NextPage = (Props) => {
 
   return (
     <>
-      <GoHome />
-      <Head>
-        <title>Day 001 Stack-Up</title>
-        <meta
-          name="description"
-          content="Day One Exploring js -- Using Matterjs"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Title
-        text="Stack Up"
-        tips="Click inside the bigger box to drop boxes and stack them up"
-      />
-      <div className={Styles.pageWrapper}>
-        <div ref={divRef} className={Styles.box} />
-        <div className={Styles.tools}>
-          <Button
-            icon={running ? "pause" : "play"}
-            intent="primary"
-            text={running ? "Pause" : "Play"}
-            className={Styles.toolButton}
-            onClick={pauseEngine}
-          />
-          <Button
-            icon="reset"
-            intent="danger"
-            text={"Reset"}
-            className={Styles.toolButton}
-            onClick={resetEngine}
-          />
+      <Paper
+        pageTitle="Day 001 Stack-Up"
+        pageDescription="Day One Exploring js -- Using Matterjs"
+        paperTitle="Stack Up"
+        paperTip="Click inside the bigger box to drop boxes and stack them up"
+      >
+        <div className={Styles.pageWrapper}>
+          <div ref={divRef} className={Styles.box} />
+          <div className={Styles.tools}>
+            <Button
+              icon={running ? "pause" : "play"}
+              intent="primary"
+              text={running ? "Pause" : "Play"}
+              className={Styles.toolButton}
+              onClick={pauseEngine}
+            />
+            <Button
+              icon="reset"
+              intent="danger"
+              text={"Reset"}
+              className={Styles.toolButton}
+              onClick={resetEngine}
+            />
+          </div>
         </div>
-      </div>
+      </Paper>
     </>
   );
 };
 
-export default Day001;
+export default Paper001;

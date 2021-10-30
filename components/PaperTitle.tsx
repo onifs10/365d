@@ -1,9 +1,9 @@
 import Styles from "../styles/title.module.scss";
 import { Classes, Tooltip2 } from "@blueprintjs/popover2";
-const Title = (Props: TitleProps): JSX.Element => {
+const PaperTitle = (Props: PaperTitleProps): JSX.Element => {
   return (
     <div className={`${Styles.title} ${Props.className}`}>
-      {Props.text}
+      <div className={Styles.text}>{Props.text}</div>
       <Tooltip2
         className={`${Classes.TOOLTIP2_INDICATOR} ${Styles.question}`}
         content={<span className={Styles.tip}>{Props.tips}</span>}
@@ -16,10 +16,10 @@ const Title = (Props: TitleProps): JSX.Element => {
   );
 };
 
-export default Title;
+export default PaperTitle;
 
-interface TitleProps {
-  tips?: string;
+interface PaperTitleProps {
+  tips?: string | JSX.Element;
   text: string;
   [x: string]: any;
 }

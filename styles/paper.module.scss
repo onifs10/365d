@@ -1,0 +1,8 @@
+.paper {
+  &:focus {
+    outline: none;
+    border: none;
+    min-width: 400px;
+    min-height: 400px;
+  }
+}

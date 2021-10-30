@@ -1,10 +1,13 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import ROUTES from "../Routes";
+import React from "react";
 
 const Home: NextPage = () => {
+  const router = useRouter();
   return (
     <div className={styles.container}>
       <Head>
@@ -24,7 +27,16 @@ const Home: NextPage = () => {
         <pre className={styles.dayLinks}>
           {ROUTES.map((item) => (
             <Link href={item.path} key={item.day} passHref>
-              <span className={styles.link}>
+              <span
+                className={styles.link}
+                tabIndex={0}
+                title={item.name}
+                onKeyPress={(event: React.KeyboardEvent<HTMLSpanElement>) => {
+                  if (event.key === "Enter") {
+                    router.push(item.path);
+                  }
+                }}
+              >
                 <span>{item.day}</span>
                 <span>{item.name}</span>
               </span>
