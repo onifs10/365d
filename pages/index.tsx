@@ -24,10 +24,10 @@ const Home: NextPage = () => {
           Exporing javascript and various libraries
         </p>
 
-        <pre className={styles.dayLinks}>
+        <div className={styles.dayLinks}>
           {ROUTES.map((item) => (
             <Link href={item.path} key={item.day} passHref>
-              <span
+              <div
                 className={styles.link}
                 tabIndex={0}
                 title={`${item.name} - ${item.date}`}
@@ -39,10 +39,10 @@ const Home: NextPage = () => {
               >
                 <span>{item.day}</span>
                 <span>{item.name}</span>
-              </span>
+              </div>
             </Link>
           ))}
-        </pre>
+        </div>
       </main>
       <footer className={styles.footer}>
         <div className={styles.handles}>

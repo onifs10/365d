@@ -13,9 +13,16 @@
 
 <br>
 
-# **_Day 2_** (Canvas Drawing)
+# **_Day 2_** (Canvas Drawing (one))
 
 ### Simple 2d generative art on HTML canvas [link](https://github.com/onifs10/365d/blob/main/pages/002.tsx) using
 
 - ## Library used
   - canvas sketch util [link](https://www.npmjs.com/package/canvas-sketch-util)
+
+# **_Day 3_** (Canvas Drawing (two))
+
+### Simple 2d on HTML canvas repeating basic shapes and lines [link](https://github.com/onifs10/365d/blob/main/pages/003.tsx) using
+
+- ## Library used
+  - none

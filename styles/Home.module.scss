@@ -109,8 +109,9 @@
 }
 
 .dayLinks {
+  max-width: 600px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 200px));
   grid-row: auto;
   column-gap: 1rem;
   row-gap: 0.5rem;
