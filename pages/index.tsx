@@ -30,7 +30,7 @@ const Home: NextPage = () => {
               <span
                 className={styles.link}
                 tabIndex={0}
-                title={item.name}
+                title={`${item.name} - ${item.date}`}
                 onKeyPress={(event: React.KeyboardEvent<HTMLSpanElement>) => {
                   if (event.key === "Enter") {
                     router.push(item.path);

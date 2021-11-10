@@ -1,10 +1,13 @@
 import type { NextPage } from "next";
 import Paper from "../components/Paper";
 import React, { useCallback, useEffect, useRef } from "react";
-const { lerp } = require("canvas-sketch-util/math");
 const random = require("canvas-sketch-util/random");
 const palettes = require("nice-color-palettes");
 import styles from "../styles/002.module.scss";
+// @ts-ignore
+import { lerp } from "canvas-sketch-util/math";
+// @ts-ignore
+import canavasSketch from "canvas-sketch";
 
 const FULL_CIRCLE = Math.PI * 2;
 const HALF_CIRCLE = Math.PI;
@@ -15,63 +18,13 @@ type sketchFunctionProps = {
   height: number;
 };
 
-const Paper002: NextPage = () => {
-  const divRef = useRef<HTMLCanvasElement | null>(null);
-
-  const draw = useCallback((context: CanvasRenderingContext2D) => {
-    const drawingFunction = sketchTwo(random.rangeFloor(10, 50));
-    drawingFunction({ context, width: 400, height: 400 });
-  }, []);
-
-  const redraw = () => {
-    const context = divRef.current?.getContext("2d");
-    if (context) {
-      context.clearRect(0, 0, 500, 500);
-      draw(context);
-    }
-  };
-
-  const handleKeyInteraction = (
-    event: React.KeyboardEvent<HTMLCanvasElement>
-  ) => {
-    if (event.key === "Enter" || event.code === "Space") {
-      redraw();
-    }
-  };
-  useEffect(() => {
-    if (divRef.current) {
-      const context = divRef.current.getContext("2d");
-      if (context) {
-        draw(context);
-      }
-    }
-  }, [divRef, draw]);
-
-  return (
-    <Paper
-      pageTitle={"Day 002 Canvas Drawing"}
-      pageDescription={"Day Two Exploting js -- Drawing on html canvas"}
-      paperTitle={"Canvas Drawing"}
-      paperTip={
-        "click on canvas to change image, or press enter to change image "
-      }
-    >
-      <canvas
-        className={styles.canvas}
-        width="400"
-        height="400"
-        ref={divRef}
-        onClick={redraw}
-        onKeyDown={handleKeyInteraction}
-        tabIndex={0}
-      ></canvas>
-    </Paper>
-  );
+const settings = {
+  dimensions: [400, 400],
+  pixelsPerInch: 300,
 };
 
-export default Paper002;
-
-const sketchTwo = (size: number) => {
+const sketchTwo = () => {
+  const size = random.rangeFloor(10, 50);
   const colors = random.rangeFloor(1, 6);
   const palette = random.shuffle(random.pick(palettes)).slice(0, colors);
 
@@ -123,3 +76,59 @@ const sketchTwo = (size: number) => {
     });
   };
 };
+
+// paper
+
+const Paper002: NextPage = () => {
+  const divRef = useRef<HTMLCanvasElement | null>(null);
+
+  const draw = useCallback((canvas: HTMLCanvasElement) => {
+    canavasSketch(sketchTwo, { ...settings, canvas });
+  }, []);
+
+  const redraw = () => {
+    const canvas = divRef.current;
+    if (canvas) {
+      draw(canvas);
+    }
+  };
+
+  const handleKeyInteraction = (
+    event: React.KeyboardEvent<HTMLCanvasElement>
+  ) => {
+    if (event.key === "Enter" || event.code === "Space") {
+      redraw();
+    }
+  };
+  useEffect(() => {
+    if (divRef.current) {
+      const canvas = divRef.current;
+      if (canvas) {
+        draw(canvas);
+      }
+    }
+  }, [divRef, draw]);
+
+  return (
+    <Paper
+      pageTitle={"Day 002 Canvas Drawing"}
+      pageDescription={"Day Two Exploting js -- Drawing on html canvas"}
+      paperTitle={"Canvas Drawing (one)"}
+      paperTip={
+        "click on canvas to change image, or press enter to change image "
+      }
+    >
+      <canvas
+        className={styles.canvas}
+        width="400"
+        height="400"
+        ref={divRef}
+        onClick={redraw}
+        onKeyDown={handleKeyInteraction}
+        tabIndex={0}
+      ></canvas>
+    </Paper>
+  );
+};
+
+export default Paper002;
