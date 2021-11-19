@@ -26,3 +26,12 @@
 
 - ## Library used
   - none
+
+# **_Day 3_** (Grids)
+
+### hex grids on canvas[link](https://github.com/onifs10/365d/blob/main/pages/004.tsx) using
+
+- ## Library used
+  - none
+- ## useful resources
+  - [Hexagonal Grids from Red Blob Games](https://www.redblobgames.com/grids/hexagons/#drawing-a-hex-grid)

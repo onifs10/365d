@@ -24,6 +24,12 @@ const ROUTES: DayInfo[] = [
     path: "/003",
     date: "07/11/2021",
   },
+  {
+    day: "004",
+    name: "Hex grid",
+    path: "/004",
+    date: "19/11/2021",
+  },
 ];
 
 export default ROUTES;
