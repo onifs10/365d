@@ -52,7 +52,7 @@ const Page004: NextPage = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   useEffect(() => {
     if (canvas) {
-      sketchFunction(canvas, pick([20, 30, 10, 5]));
+      sketchFunction(canvas, pick([20, 30, 15, 10, 7, 5]));
     }
   }, [canvas]);
   return (
