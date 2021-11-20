@@ -21,3 +21,9 @@ a {
     outline: lightgreen solid 2.5px;
   }
 }
+
+.bp3-slider-track {
+  .bp3-slider-progress.bp3-intent-success {
+    background-color: lightgreen !important;
+  }
+}

@@ -26,9 +26,15 @@ const ROUTES: DayInfo[] = [
   },
   {
     day: "004",
-    name: "Hex grid",
+    name: "Hex grid (flat)",
     path: "/004",
     date: "19/11/2021",
+  },
+  {
+    day: "005",
+    name: "Hex grid (Pointy)",
+    path: "/005",
+    date: "20/11/2021",
   },
 ];
 

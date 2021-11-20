@@ -5,10 +5,11 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { get, r30, r60, SQRT_3, Vector, shuffle, range, pick } from "../utils";
 const palettes = require("nice-color-palettes");
 
+const patterns = ["*?", "p1", "p2", "p3"];
+
 const Paper003: NextPage = () => {
   const divRef = useRef<HTMLCanvasElement | null>(null);
   const [selected, setSelected] = useState(pick([0, 1, 2, 3]));
-  const patterns = ["*?", "p1", "p2", "p3"];
 
   const drawSketch = useCallback(
     (
@@ -134,7 +135,7 @@ const Paper003: NextPage = () => {
         }
       }
     },
-    []
+    [selected]
   );
 
   const draw = useCallback(
@@ -190,7 +191,7 @@ const Paper003: NextPage = () => {
             onKeyPress={(event: React.KeyboardEvent<HTMLDivElement>) => {
               event.stopPropagation();
               if (event.key === "Enter") {
-                setSelected(index);   
+                setSelected(index);
               }
             }}
             tabIndex={0}
