@@ -2,21 +2,9 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Paper from "../components/Paper";
 import SliderComponent from "../components/slider";
-import CanvasStyles from "../styles/canvas.module.scss";
-import { pick, SQRT_3, Vector } from "../utils";
+import { getPointyHaxgonalPoint, pick, SQRT_3, Vector } from "../utils";
 const palettes = require("nice-color-palettes");
-
-const getPointyHaxgonalPoint = (size: number, center: Vector): Vector[] => {
-  const points: Vector[] = [];
-  for (let i = 0; i < 6; i++) {
-    const angle = 60 * i - 30;
-    const angleInRad = (Math.PI / 180) * angle;
-    let xCoordinate = center[0] + size * Math.cos(angleInRad);
-    let yCoordinate = center[1] + size * Math.sin(angleInRad);
-    points.push([xCoordinate, yCoordinate]);
-  }
-  return points;
-};
+import CanvasStyles from "../styles/canvas.module.scss";
 
 const sketchFunction = (canvas: HTMLCanvasElement, size: number) => {
   const context = canvas.getContext("2d");

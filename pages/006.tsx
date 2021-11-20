@@ -2,45 +2,55 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Paper from "../components/Paper";
 import SliderComponent from "../components/slider";
-import styles from "../styles/004.module.scss";
-import { getFlatHaxgonalPoint, pick, SQRT_3, Vector } from "../utils";
+import CanvasStyles from "../styles/canvas.module.scss";
+import { getPointyHaxgonalPoint, pick, SQRT_3, Vector } from "../utils";
 const palettes = require("nice-color-palettes");
 
 const sketchFunction = (canvas: HTMLCanvasElement, size: number) => {
   const context = canvas.getContext("2d");
   context?.clearRect(0, 0, canvas.width, canvas.height);
-  let offsetX = size / 2;
-  let offsetY = -size / 2 / SQRT_3;
-  let countX = Math.floor(canvas.width / size);
-  for (let y = (SQRT_3 * size) / 2; y < canvas.width; y += SQRT_3 * size) {
-    for (let x = 0; x < countX; x++) {
-      let centerX = x * (size * 2 * (3 / 4));
-      let centerY = y;
-      if (x % 2 === 1) {
-        centerY = y + (SQRT_3 * size) / 2;
+  let offsetY = size / 2;
+  let offsetX = -size / 2 / SQRT_3;
+  let countY = Math.floor(canvas.width / size);
+  for (let x = (SQRT_3 * size) / 2; x < canvas.width; x += SQRT_3 * size) {
+    for (let y = 0; y < countY; y++) {
+      let centerY = y * (size * 2 * (3 / 4));
+      let centerX = x;
+      if (y % 2 === 1) {
+        centerX = x + (SQRT_3 * size) / 2;
       }
-      let points = getFlatHaxgonalPoint(size, [
+      let points: Vector[] = getPointyHaxgonalPoint(size, [
         centerX + offsetX,
         centerY + offsetY,
       ]);
+      const color = pick<string>(pick<string[]>(palettes));
       if (context) {
         context.beginPath();
         context.moveTo(...points[0]);
         for (let i = 1; i < points.length; i++) {
           context?.lineTo(...points[i]);
         }
-        context.strokeStyle = pick(pick(palettes));
+        context.strokeStyle = color;
         context.lineWidth = 2;
         context.closePath();
         context.stroke();
+        for (let i = 0; i < points.length; i += 2) {
+          context.beginPath();
+          context.moveTo(...points[i]);
+          context.lineTo(centerX + offsetX, centerY + offsetY);
+          context.strokeStyle = color;
+          context.lineWidth = 2;
+          context.closePath();
+          context.stroke();
+        }
       }
     }
   }
 };
 
-const Page004: NextPage = () => {
+const Page006: NextPage = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
-  const [size, setSize] = useState<number>(pick([20, 30, 15, 10, 7, 5]));
+  const [size, setSize] = useState<number>(pick([20, 30, 15, 10]));
   useEffect(() => {
     if (canvas) {
       sketchFunction(canvas, size);
@@ -48,19 +58,19 @@ const Page004: NextPage = () => {
   }, [canvas, size]);
   return (
     <Paper
-      pageTitle={"Hex grid"}
-      pageDescription={"Drawing hexagonal grids on canvas"}
-      paperTitle={"Hexagonal grids (Flat Top)"}
+      pageTitle={"Hex grid (cube)"}
+      pageDescription={"Drawing cubes with hexagonal grids on canvas"}
+      paperTitle={"Hexagonal grids (Cube)"}
       paperTip={"Change grid size using the slider below"}
     >
       <canvas
         ref={setCanvas}
-        className={styles.canvas}
+        className={CanvasStyles.canvas}
         width="400"
         height="400"
       />
       <SliderComponent
-        min={5}
+        min={10}
         max={30}
         stepSize={2}
         labelStepSize={5}
@@ -73,4 +83,4 @@ const Page004: NextPage = () => {
   );
 };
 
-export default Page004;
+export default Page006;
