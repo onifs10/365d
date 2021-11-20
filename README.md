@@ -27,7 +27,7 @@
 - ## Library used
   - none
 
-# **_Day 4_** (Hex Grids)
+# **_Day 4 && Day 5_** (Hex Grids)
 
 ### hex grids on canvas[link](https://github.com/onifs10/365d/blob/main/pages/004.tsx) using
 
