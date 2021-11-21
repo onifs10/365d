@@ -29,9 +29,27 @@
 
 # **_Day 4 && Day 5_** (Hex Grids)
 
-### hex grids on canvas[link](https://github.com/onifs10/365d/blob/main/pages/004.tsx) using
+### hex grids on canvas[link 4](https://github.com/onifs10/365d/blob/main/pages/004.tsx) [link 5](https://github.com/onifs10/365d/blob/main/pages/005.tsx) using
 
 - ## Library used
   - none
 - ## useful resources
   - [Hexagonal Grids from Red Blob Games](https://www.redblobgames.com/grids/hexagons/#drawing-a-hex-grid)
+
+# **_Day 6_** (Cubes)
+
+### hex grids on canvas[link](https://github.com/onifs10/365d/blob/main/pages/006.tsx) using
+
+- ## Library used
+  - none
+- ## useful resources
+  - [Hexagonal Grids from Red Blob Games](https://www.redblobgames.com/grids/hexagons/#drawing-a-hex-grid)
+
+# **_Day 7_** (Cubes)
+
+### canvas animation [link](https://github.com/onifs10/365d/blob/main/pages/007.tsx) using
+
+- ## Library used
+  - none
+- ## useful resources
+  - [Canvas BAsic Animation MDN ](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations)

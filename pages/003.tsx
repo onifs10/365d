@@ -22,7 +22,7 @@ const Paper003: NextPage = () => {
       const context = canvas.getContext("2d");
       const points: Vector[] = [];
       for (let i = 0; i < 6; i++) {
-        let xCordinate = x + size * Math.cos(((i % 6) * 2 * Math.PI) / 6);
+        let xCordinate = x + size * Math.cos((i * 2 * Math.PI) / 6);
         let yCordinate = y + size * Math.sin((i * 2 * Math.PI) / 6);
         points.push([xCordinate, yCordinate]);
       }
@@ -32,6 +32,7 @@ const Paper003: NextPage = () => {
         const [x2, y2] = points[(i + 1) % 6];
         return [(x1 + x2) / 2, (y1 + y2) / 2];
       });
+
       if (context) {
         context.strokeStyle = colors[0];
         context.lineWidth = 2;

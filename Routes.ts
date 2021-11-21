@@ -42,6 +42,13 @@ const ROUTES: DayInfo[] = [
     path: "/006",
     date: "21/11/2021",
   },
+
+  {
+    day: "007",
+    name: "Canvas Animation",
+    path: "/007",
+    date: "21/11/2021",
+  },
 ];
 
 export default ROUTES;
