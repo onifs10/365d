@@ -3,6 +3,7 @@ import Paper from "../components/Paper";
 import styles from "../styles/003.module.scss";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { get, r30, r60, SQRT_3, Vector, shuffle, range, pick } from "../utils";
+import Canvas from "../components/Canvas";
 const palettes = require("nice-color-palettes");
 
 const patterns = ["*?", "p1", "p2", "p3"];
@@ -174,13 +175,7 @@ const Paper003: NextPage = () => {
       paperTitle={"Canvas sketch"}
       paperTip={"Change pattern by selecting any option below the canvas"}
     >
-      <canvas
-        className={styles.canvas}
-        width="400"
-        height="400"
-        ref={divRef}
-        tabIndex={0}
-      />
+      <Canvas ref={divRef} />
       <div className={styles.options}>
         {patterns.map((pattern, index) => (
           <div

@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
+import Canvas from "../components/Canvas";
 import Paper from "../components/Paper";
 import SliderComponent from "../components/slider";
 import CanvasStyles from "../styles/canvas.module.scss";
@@ -63,12 +64,7 @@ const Page006: NextPage = () => {
       paperTitle={"Hexagonal grids (Cube)"}
       paperTip={"Change grid size using the slider below"}
     >
-      <canvas
-        ref={setCanvas}
-        className={CanvasStyles.canvas}
-        width="400"
-        height="400"
-      />
+      <Canvas ref={setCanvas} />
       <SliderComponent
         min={10}
         max={30}

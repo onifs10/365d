@@ -4,7 +4,7 @@ import Paper from "../components/Paper";
 import SliderComponent from "../components/slider";
 import { getPointyHaxgonalPoint, pick, SQRT_3, Vector } from "../utils";
 const palettes = require("nice-color-palettes");
-import CanvasStyles from "../styles/canvas.module.scss";
+import Canvas from "../components/Canvas";
 
 const sketchFunction = (canvas: HTMLCanvasElement, size: number) => {
   const context = canvas.getContext("2d");
@@ -54,12 +54,7 @@ const Page005: NextPage = () => {
       paperTip={"Change grid size using the slider below"}
     >
       <>
-        <canvas
-          ref={setCanvas}
-          className={CanvasStyles.canvas}
-          width="400"
-          height="400"
-        />
+        <Canvas ref={setCanvas} />
         <SliderComponent
           min={5}
           max={30}

@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { Icon } from "@blueprintjs/core";
 
 import Styles from "../styles/layout.module.scss";
-import { useEffect, useRef } from "react";
 
 const Layout: React.FC = ({ children }) => {
   return <div className={Styles.container}>{children}</div>;

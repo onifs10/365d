@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { MouseEvent, useEffect, useState } from "react";
+import Canvas from "../components/Canvas";
 import Paper from "../components/Paper";
 const palettes = require("nice-color-palettes");
 import CanvasStyle from "../styles/canvas.module.scss";
@@ -129,15 +130,14 @@ const Page007: NextPage = () => {
       paperTitle={"Canvas Animation"}
       paperTip={"put mouse over canvas to move boxes"}
     >
-      <canvas
+      <Canvas
         ref={setCanvas}
-        className={CanvasStyle.canvas}
         width={400}
         height={400}
         onMouseMove={(e) => {
           animationFrame && animationFrame.setCursor(e);
         }}
-      ></canvas>
+      />
     </Paper>
   );
 };

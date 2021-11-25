@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
+import Canvas from "../components/Canvas";
 import Paper from "../components/Paper";
 import SliderComponent from "../components/slider";
-import styles from "../styles/004.module.scss";
 import { getFlatHaxgonalPoint, pick, SQRT_3, Vector } from "../utils";
 const palettes = require("nice-color-palettes");
 
@@ -53,12 +53,7 @@ const Page004: NextPage = () => {
       paperTitle={"Hexagonal grids (Flat Top)"}
       paperTip={"Change grid size using the slider below"}
     >
-      <canvas
-        ref={setCanvas}
-        className={styles.canvas}
-        width="400"
-        height="400"
-      />
+      <Canvas ref={setCanvas} />
       <SliderComponent
         min={5}
         max={30}

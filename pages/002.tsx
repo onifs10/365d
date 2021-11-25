@@ -8,6 +8,7 @@ import styles from "../styles/002.module.scss";
 import { lerp } from "canvas-sketch-util/math";
 // @ts-ignore
 import canavasSketch from "canvas-sketch";
+import Canvas from "../components/Canvas";
 
 const FULL_CIRCLE = Math.PI * 2;
 const HALF_CIRCLE = Math.PI;
@@ -118,15 +119,13 @@ const Paper002: NextPage = () => {
         "click on canvas to change image, or press enter to change image "
       }
     >
-      <canvas
+      <Canvas
         className={styles.canvas}
-        width="400"
-        height="400"
         ref={divRef}
         onClick={redraw}
         onKeyDown={handleKeyInteraction}
         tabIndex={0}
-      ></canvas>
+      />
     </Paper>
   );
 };
