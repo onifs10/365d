@@ -12,7 +12,59 @@ import {
   WebGLRenderer,
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import pageStyle from "../styles/008.module.scss";
+import { Switch } from "@blueprintjs/core";
+const Page008: NextPage = () => {
+  const [wireFrame, setWireframe] = useState<boolean>(true);
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const [canvasScene, setScene] = useState<CanvasScene>();
+  const handleToggleWireframe = () => {
+    setWireframe((v) => !v);
+  };
+  useEffect(() => {
+    if (canvasRef.current) {
+      if (!canvasScene) {
+        const canvasSceneObj = new CanvasScene(canvasRef.current);
+        setScene(canvasSceneObj);
+        canvasSceneObj.createMesh().start();
+      }
+    }
+  }, [canvasRef, canvasScene]);
+  useEffect(() => {
+    if (canvasScene) {
+      canvasScene.createMesh(wireFrame);
+    }
+  }, [canvasScene, wireFrame]);
+  return (
+    <Paper
+      pageTitle={"Three"}
+      pageDescription={"Using gls for shaders in three js"}
+      paperTitle={"Three.js"}
+      paperTip={<p>hands on three js using webgl shader </p>}
+    >
+      <div ref={canvasRef} />
+      <div style={{ paddingTop: "1rem", color: "green" }}>
+        <Switch
+          checked={wireFrame}
+          label="Wirefame"
+          onChange={handleToggleWireframe}
+        />
+      </div>
+      <div style={{ color: "green" }}>
+        following{" "}
+        <a
+          href="https://tympanus.net/codrops/2020/03/17/create-a-wave-motion-effect-on-an-image-with-three-js/"
+          target="_blank"
+          rel="noreferrer"
+          style={{ fontWeight: "bold" }}
+        >
+          this guide
+        </a>
+      </div>
+    </Paper>
+  );
+};
+
+export default Page008;
 
 class CanvasScene {
   private scene: Scene;
@@ -190,7 +242,12 @@ class CanvasScene {
     `;
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
   }
-  createMesh = () => {
+  createMesh = (wireframe: boolean = false) => {
+    if (this.mesh) {
+      this.mesh.geometry?.dispose();
+      this.scene.remove(this.mesh);
+      this.renderer.renderLists.dispose();
+    }
     this.geometry = new PlaneGeometry(1.5, 1.5, 16, 16);
     this.material = new ShaderMaterial({
       fragmentShader: this.fragmentShader,
@@ -198,6 +255,7 @@ class CanvasScene {
       uniforms: {
         uTime: { value: 0.0 },
       },
+      wireframe,
     });
     this.mesh = new Mesh(this.geometry, this.material);
     this.scene.add(this.mesh);
@@ -211,39 +269,3 @@ class CanvasScene {
     this.renderer.render(this.scene, this.camera);
   };
 }
-const Page008: NextPage = () => {
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const [canvasScene, setScene] = useState<CanvasScene>();
-  useEffect(() => {
-    if (canvasRef.current) {
-      if (!canvasScene) {
-        const canvasSceneObj = new CanvasScene(canvasRef.current);
-        setScene(canvasSceneObj);
-        canvasSceneObj.createMesh().start();
-      }
-    }
-  }, [canvasRef, canvasScene]);
-  return (
-    <Paper
-      pageTitle={"Three"}
-      pageDescription={"Using gls for shaders in three js"}
-      paperTitle={"Three.js"}
-      paperTip={<p>hands on three js using webgl shader </p>}
-    >
-      <div ref={canvasRef} />
-      <div style={{ padding: "1rem", color: "green" }}>
-        following{" "}
-        <a
-          href="https://tympanus.net/codrops/2020/03/17/create-a-wave-motion-effect-on-an-image-with-three-js/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ fontWeight: "bold" }}
-        >
-          this guide
-        </a>
-      </div>
-    </Paper>
-  );
-};
-
-export default Page008;
