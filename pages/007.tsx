@@ -3,7 +3,6 @@ import { MouseEvent, useEffect, useState } from "react";
 import Canvas from "../components/Canvas";
 import Paper from "../components/Paper";
 const palettes = require("nice-color-palettes");
-import CanvasStyle from "../styles/canvas.module.scss";
 import { getPointyHaxgonalPoint, pick, Vector } from "../utils";
 
 const cursor = { x: 0, y: 0 };
