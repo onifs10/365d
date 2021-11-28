@@ -57,7 +57,7 @@ const ROUTES: DayInfo[] = [
   {
     day: "009",
     name: "Scope",
-    path: "/000",
+    path: "/009",
     date: "28/11/2021",
   },
 ];
