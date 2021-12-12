@@ -45,11 +45,38 @@
 - ## useful resources
   - [Hexagonal Grids from Red Blob Games](https://www.redblobgames.com/grids/hexagons/#drawing-a-hex-grid)
 
-# **_Day 7_** (Cubes)
+# **_Day 7_**
 
-### canvas animation [link](https://github.com/onifs10/365d/blob/main/pages/007.tsx) using
+### canvas animation [link](https://github.com/onifs10/365d/blob/main/pages/007.tsx)
 
 - ## Library used
   - none
 - ## useful resources
   - [Canvas BAsic Animation MDN ](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
+
+# **_Day 8_**
+
+### Threejs sharders [link](https://github.com/onifs10/365d/blob/main/pages/008tsx)
+
+- ## Library used
+  - [Threejs](https://threejs.org/)
+- ## useful resources
+  - none
+
+# **_Day 9_**
+
+### Scope [link](https://github.com/onifs10/365d/blob/main/pages/009tsx)
+
+- ## Library used
+  - None
+- ## useful resources
+  - none
+
+# **_Day 10_**
+
+### Nagating animation [link](https://github.com/onifs10/365d/blob/main/pages/009tsx)
+
+- ## Library used
+  - None
+- ## useful resources
+  - [rotating shapes](https://danceswithcode.net/engineeringnotes/rotations_in_2d/rotations_in_2d.html)

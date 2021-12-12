@@ -60,6 +60,12 @@ const ROUTES: DayInfo[] = [
     path: "/009",
     date: "28/11/2021",
   },
+  {
+    day: "010",
+    name: "Negating illusion",
+    path: "/010",
+    date: "13/12/2021",
+  },
 ];
 
 export default ROUTES;
