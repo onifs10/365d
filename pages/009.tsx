@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-import { left } from "@popperjs/core";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useCallback, useEffect, useState, MouseEvent } from "react";
