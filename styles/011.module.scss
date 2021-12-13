@@ -1,0 +1,20 @@
+.inputsDiv {
+  width: 100%;
+  padding: 0.5rem 0;
+  > div {
+    width: 100%;
+    display: flex;
+    color: green;
+    margin: 0.5rem 0;
+    > label {
+      padding: 0.5rem;
+    }
+    > input {
+      padding: 0.5rem;
+      flex: auto;
+      border: none;
+      border-bottom: 1px solid lightgreen;
+      color: green;
+    }
+  }
+}
