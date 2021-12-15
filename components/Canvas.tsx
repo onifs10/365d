@@ -1,10 +1,4 @@
-import {
-  forwardRef,
-  ForwardRefRenderFunction,
-  MouseEvent,
-  PropsWithRef,
-  ReactPropTypes,
-} from "react";
+import { forwardRef, ForwardRefRenderFunction, PropsWithRef } from "react";
 import canvasStyle from "../styles/canvas.module.scss";
 
 export interface CanvasProps

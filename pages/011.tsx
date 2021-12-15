@@ -12,6 +12,104 @@ const MathContext = `const {${Object.getOwnPropertyNames(Math).join(
   ","
 )}}=Math`;
 
+const Page011: NextPage = () => {
+  const canvas = useRef<HTMLCanvasElement | null>(null);
+  const iframe = useRef<HTMLIFrameElement | null>(null);
+  const [frame, setFrame] = useState<Frame | null>(null);
+  const [fumX, setFumX] = useState<string>("x + (random() - 0.5) * 8");
+  const [fumY, setFumY] = useState<string>("y + (random() - 0.5) * 8");
+  const [playing, setPlaying] = useState<boolean>(true);
+  const [size, setSize] = useState<number>(pick([20, 30, 15, 10, 7, 5]));
+  // track  formular change
+  useEffect(() => {
+    if (frame) {
+      frame.stop();
+      frame.addRandomizationFunc(fumX, fumY);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fumX, fumY]);
+
+  useEffect(() => {
+    if (frame) {
+      frame.updateSpeed(size);
+    }
+  }, [size, frame]);
+
+  useEffect(() => {
+    if (!frame && canvas.current && iframe.current) {
+      const frame = new Frame(
+        canvas.current,
+        iframe.current,
+        () => setPlaying(false),
+        size
+      );
+      setFrame(frame);
+      frame.init().addRandomizationFunc(fumX, fumY).animate();
+    }
+  }, [canvas, frame]);
+
+  const handleButtonClick = useCallback(() => {
+    if (frame) {
+      playing ? frame.pause() : frame.start();
+      setPlaying((v) => !v);
+    }
+  }, [frame, playing]);
+
+  return (
+    <Paper
+      pageTitle={"Unpredictable"}
+      pageDescription={"Print pixel dots on canvas randomly"}
+      paperTitle={"Unpredictable"}
+      paperTip={"Edit settings below"}
+    >
+      <Canvas ref={canvas} />
+      <iframe
+        sandbox="allow-same-origin"
+        ref={iframe}
+        style={{ display: "none" }}
+      ></iframe>
+      <div className={styles.inputsDiv}>
+        <div className="x-input-div">
+          <label htmlFor="x">{"x2 = (x,y,t) =>"} </label>
+          <input
+            type="text"
+            value={fumX}
+            onChange={(e) => setFumX(e.target.value)}
+          />
+        </div>
+        <div className="y-inpt-div">
+          <label htmlFor="y">{"y2 = (x,y,t) =>"} </label>
+          <input
+            type="text"
+            value={fumY}
+            onChange={(e) => setFumY(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="slider">speed</label>
+          <SliderComponent
+            min={5}
+            max={30}
+            stepSize={2}
+            labelStepSize={5}
+            value={size}
+            onChange={(size) => {
+              setSize(size);
+            }}
+          />
+        </div>
+        <div>
+          <Button
+            text={playing ? "pause" : "play"}
+            intent={playing ? "primary" : "success"}
+            onClick={handleButtonClick}
+          />
+        </div>
+      </div>
+    </Paper>
+  );
+};
+
 class Frame {
   private context: CanvasRenderingContext2D | null;
   private canvasSize: {
@@ -189,103 +287,5 @@ class Frame {
     this.playing = false;
   };
 }
-
-const Page011: NextPage = () => {
-  const canvas = useRef<HTMLCanvasElement | null>(null);
-  const iframe = useRef<HTMLIFrameElement | null>(null);
-  const [frame, setFrame] = useState<Frame | null>(null);
-  const [fumX, setFumX] = useState<string>("x + (random() - 0.5) * 8");
-  const [fumY, setFumY] = useState<string>("y + (random() - 0.5) * 8");
-  const [playing, setPlaying] = useState<boolean>(true);
-  const [size, setSize] = useState<number>(pick([20, 30, 15, 10, 7, 5]));
-  // track  formular change
-  useEffect(() => {
-    if (frame) {
-      frame.stop();
-      frame.addRandomizationFunc(fumX, fumY);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fumX, fumY]);
-
-  useEffect(() => {
-    if (frame) {
-      frame.updateSpeed(size);
-    }
-  }, [size, frame]);
-
-  useEffect(() => {
-    if (!frame && canvas.current && iframe.current) {
-      const frame = new Frame(
-        canvas.current,
-        iframe.current,
-        () => setPlaying(false),
-        size
-      );
-      setFrame(frame);
-      frame.init().addRandomizationFunc(fumX, fumY).animate();
-    }
-  }, [canvas, frame]);
-
-  const handleButtonClick = useCallback(() => {
-    if (frame) {
-      playing ? frame.pause() : frame.start();
-      setPlaying((v) => !v);
-    }
-  }, [frame, playing]);
-
-  return (
-    <Paper
-      pageTitle={"Unpredictable"}
-      pageDescription={"Print pixel dots on canvas randomly"}
-      paperTitle={"Unpredictable"}
-      paperTip={"Edit settings below"}
-    >
-      <Canvas ref={canvas} />
-      <iframe
-        sandbox="allow-same-origin"
-        ref={iframe}
-        style={{ display: "none" }}
-      ></iframe>
-      <div className={styles.inputsDiv}>
-        <div className="x-input-div">
-          <label htmlFor="x">{"x2 = (x,y,t) =>"} </label>
-          <input
-            type="text"
-            value={fumX}
-            onChange={(e) => setFumX(e.target.value)}
-          />
-        </div>
-        <div className="y-inpt-div">
-          <label htmlFor="y">{"y2 = (x,y,t) =>"} </label>
-          <input
-            type="text"
-            value={fumY}
-            onChange={(e) => setFumY(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="slider">speed</label>
-          <SliderComponent
-            min={5}
-            max={30}
-            stepSize={2}
-            labelStepSize={5}
-            value={size}
-            onChange={(size) => {
-              setSize(size);
-            }}
-          />
-        </div>
-        <div>
-          <Button
-            text={playing ? "pause" : "play"}
-            intent={playing ? "primary" : "success"}
-            onClick={handleButtonClick}
-          />
-        </div>
-      </div>
-    </Paper>
-  );
-};
 
 export default Page011;
