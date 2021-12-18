@@ -156,7 +156,7 @@ class Frame extends FrameBase {
     this.playing = false;
     this.context.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
     this.context.lineWidth = 1;
-    this.context.strokeStyle = "green";
+    this.context.strokeStyle = "#228B2270";
     this.prevSteps = [];
     this.iterations = 0;
     this.steps =
