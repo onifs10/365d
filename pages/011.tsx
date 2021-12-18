@@ -46,6 +46,7 @@ const Page011: NextPage = () => {
       setFrame(frame);
       frame.init().addRandomizationFunc(fumX, fumY).animate();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvas, frame]);
 
   const handleButtonClick = useCallback(() => {

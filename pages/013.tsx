@@ -30,12 +30,14 @@ const Page013: NextPage = () => {
       setFrame(frameObj);
       frameObj.start();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvas]);
 
   useEffect(() => {
     if (frame) {
       frame.update(length, branches);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [branches, length]);
   return (
     <Paper
