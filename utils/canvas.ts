@@ -58,3 +58,25 @@ export const getFlatHaxgonalPoint = (
   }
   return points;
 };
+
+export class FrameBase {
+  protected context: CanvasRenderingContext2D;
+  protected canvasSize: {
+    width: number;
+    height: number;
+    cx: number;
+    cy: number;
+  };
+  protected canvas: HTMLCanvasElement;
+  constructor(canvas: HTMLCanvasElement) {
+    this.canvas = canvas;
+    const { ctx } = initCanvas(canvas);
+    this.context = ctx;
+    this.canvasSize = {
+      width: canvas.width,
+      height: canvas.height,
+      cx: canvas.width / 2,
+      cy: canvas.height / 2,
+    };
+  }
+}

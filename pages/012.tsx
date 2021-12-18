@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
 import Canvas from "../components/Canvas";
 import Paper from "../components/Paper";
-import { pick, r180, r90 } from "../utils";
+import { FrameBase, pick, r180, r90 } from "../utils";
 const palettes = require("nice-color-palettes");
 
 const Page012: NextPage = () => {
@@ -29,30 +29,13 @@ const Page012: NextPage = () => {
   );
 };
 
-class Frame {
-  private context: CanvasRenderingContext2D | null = null;
-  private canvasSize: {
-    width: number;
-    height: number;
-    cx: number;
-    cy: number;
-  };
-  private canvas: HTMLCanvasElement;
+class Frame extends FrameBase {
   private startTime: number = Date.now();
-  private readonly duration: number = 200;
+  private readonly duration: number = 100;
   private particles: Particle[] = [];
   private iterations: number = 0;
   constructor(canvas: HTMLCanvasElement) {
-    this.canvas = canvas;
-    this.canvasSize = {
-      width: canvas.width,
-      height: canvas.height,
-      cx: canvas.width / 2,
-      cy: canvas.height / 2,
-    };
-    if (canvas.getContext("2d")) {
-      this.context = canvas.getContext("2d");
-    }
+    super(canvas);
     canvas.style.border = "none";
     this.context!.strokeStyle = "green";
     this.context!.lineWidth = 2;
@@ -203,7 +186,10 @@ class Particle {
   sketch = () => {
     this.arcSize += 1;
     if (this.turn) {
-      this.drawRoundRect(this.size - this.offset, this.arcSize * 2);
+      this.drawRoundRect(
+        this.size - this.offset,
+        this.arcSize * 0.02 * this.size
+      );
     } else {
       this.drawRectRound(this.size - this.offset, this.arcSize * 50);
     }
@@ -215,7 +201,7 @@ class Particle {
       this.destroy();
     }
     if (!this.turn) {
-      this.size = this.size * 0.702;
+      this.size = (this.size - 20) * 0.702;
       this.arcSize = 0;
     } else {
       this.size = this.size * 0.8;
