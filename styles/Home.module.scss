@@ -128,7 +128,7 @@
   align-items: center;
   .link {
     cursor: pointer;
-    opacity: 0.9;
+    opacity: 0.7;
     text-align: left;
     transition: transform 200ms cubic-bezier(0.79, -0.15, 0, 1.36);
     span:nth-child(2n + 2) {
@@ -141,7 +141,6 @@
     }
     &:hover {
       opacity: 1;
-      transform: scale(1.1);
     }
   }
 }

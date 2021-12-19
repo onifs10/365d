@@ -23,10 +23,11 @@ const Page013: NextPage = () => {
   const [frame, setFrame] = useState<Frame | null>(null);
   const [length, setLength] = useState<number>(5);
   const [branches, setBranches] = useState<number>(3);
+  const [playing, setPlaying] = useState<boolean>(false);
 
   useEffect(() => {
     if (canvas.current) {
-      const frameObj = new Frame(canvas.current, length, branches);
+      const frameObj = new Frame(canvas.current, setPlaying, length, branches);
       setFrame(frameObj);
       frameObj.start();
     }
@@ -75,6 +76,9 @@ const Page013: NextPage = () => {
           />
         </div>
       </div>
+      <div style={{ color: "green", minHeight: "20px" }}>
+        {playing ? "*" : ""}
+      </div>
     </Paper>
   );
 };
@@ -89,8 +93,14 @@ class Frame extends FrameBase {
   private branches = 5;
   private length = 5;
   private playing = false;
+  private toggleState: (state: boolean) => void;
 
-  constructor(canvas: HTMLCanvasElement, length?: number, branches?: number) {
+  constructor(
+    canvas: HTMLCanvasElement,
+    toggleState: (state: boolean) => void,
+    length?: number,
+    branches?: number
+  ) {
     super(canvas);
     if (length) {
       this.length = length;
@@ -99,6 +109,7 @@ class Frame extends FrameBase {
     if (branches) {
       this.branches = branches;
     }
+    this.toggleState = toggleState;
   }
 
   update = (len: number, branches: number) => {
@@ -140,6 +151,7 @@ class Frame extends FrameBase {
     this.steps = [];
     if (!this.prevSteps.length) {
       this.playing = false;
+      this.toggleState(false);
     } else {
       this.prevSteps.forEach((i) => i());
     }
@@ -154,6 +166,7 @@ class Frame extends FrameBase {
 
   start = () => {
     this.playing = false;
+    this.toggleState(false);
     this.context.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
     this.context.lineWidth = 1;
     this.context.strokeStyle = "#228B2270";
@@ -180,6 +193,7 @@ class Frame extends FrameBase {
               ),
           ];
     this.playing = true;
+    this.toggleState(true);
     this.animate();
   };
 }

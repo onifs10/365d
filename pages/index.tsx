@@ -18,7 +18,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           {/* add effect to animate ancor color */}
-          365 days <a href="https://nextjs.org">Xploring</a>
+          365 days <a href="#">Xploring</a>
         </h1>
         <p className={styles.description}>
           Exporing javascript and various libraries
