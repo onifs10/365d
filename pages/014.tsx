@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
-import Canvas from "../components/Canvas";
 import Paper from "../components/Paper";
 import {
   distance,
@@ -36,7 +35,7 @@ const Page013: NextPage = () => {
       paperTitle={"Lines"}
       paperTip={"move mouse over canvas"}
     >
-      <Canvas ref={canvas} />
+      <canvas ref={canvas} />
     </Paper>
   );
 };
@@ -79,8 +78,8 @@ class Frame extends FrameBase {
       context.strokeStyle = "green";
       context.fillStyle = "green";
       context.clearRect(0, 0, width, height);
-      let mouseX: number = this.canvasSize.cx,
-        mouseY: number = this.canvasSize.cy;
+      let mouseX: number = width / 2,
+        mouseY: number = height / 2;
 
       if (this.mouseEvent) {
         let { clientX, clientY } = this.mouseEvent;
@@ -100,10 +99,8 @@ class Frame extends FrameBase {
 
           // https://www.redblobgames.com/grids/hexagons/#hex-to-pixel-axial
           const currentOffset = {
-            x:
-              this.canvasSize.cx +
-              this.margin * (q * SQRT_3 + (r * SQRT_3) / 2),
-            y: this.canvasSize.cx + this.margin * ((r * 3) / 2),
+            x: width / 2 + this.margin * (q * SQRT_3 + (r * SQRT_3) / 2),
+            y: width / 2 + this.margin * ((r * 3) / 2),
           };
 
           // diatance from line to mouse position
@@ -140,7 +137,6 @@ class Frame extends FrameBase {
   };
 
   init = () => {
-    this.canvas.style.border = "none";
     canavasSketch(this.sketch, this.settings);
   };
 }
