@@ -77,6 +77,7 @@ class Frame extends FrameBase {
 
     return ({ context, width, height, frame }: sketchFunctionProps) => {
       context.strokeStyle = "green";
+      context.fillStyle = "green";
       context.clearRect(0, 0, width, height);
       let mouseX: number = this.canvasSize.cx,
         mouseY: number = this.canvasSize.cy;
@@ -129,8 +130,10 @@ class Frame extends FrameBase {
           context.moveTo(0, 0);
           context.lineTo(length, 0);
           context.closePath();
-          context.restore();
           context.stroke();
+          context.arc(length, 0, 2, 0, 360);
+          context.fill();
+          context.restore();
         }
       }
     };
