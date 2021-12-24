@@ -9,15 +9,10 @@ import { lerp } from "canvas-sketch-util/math";
 // @ts-ignore
 import canavasSketch from "canvas-sketch";
 import Canvas from "../components/Canvas";
+import { sketchFunctionProps } from "../utils";
 
 const FULL_CIRCLE = Math.PI * 2;
 const HALF_CIRCLE = Math.PI;
-
-type sketchFunctionProps = {
-  context: CanvasRenderingContext2D;
-  width: number;
-  height: number;
-};
 
 const settings = {
   dimensions: [400, 400],

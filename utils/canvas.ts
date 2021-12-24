@@ -80,3 +80,10 @@ export class FrameBase {
     };
   }
 }
+
+export type sketchFunctionProps = {
+  context: CanvasRenderingContext2D;
+  width: number;
+  height: number;
+  frame?: number;
+};

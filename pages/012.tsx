@@ -42,7 +42,7 @@ class Frame extends FrameBase {
   }
 
   private remove = () => {
-    this.particles.shift();
+    this.particles.pop();
   };
 
   private clear = () => {
@@ -63,7 +63,7 @@ class Frame extends FrameBase {
         this.remove,
         pick(pick<string[]>(palettes))
       );
-      this.particles.push(particle);
+      this.particles.unshift(particle);
     }
     return this;
   };
@@ -116,6 +116,8 @@ class Particle {
       this.context.save();
       this.context.beginPath();
       this.context.strokeStyle = this.color;
+      this.context.fillStyle = this.color;
+
       // start top border
       this.context.moveTo(x + r, y);
       this.context.lineTo(x + size - r, y);
@@ -143,7 +145,11 @@ class Particle {
       this.context.arc(x + r, y + r, r, r180, -r90);
       //   this.context.closePath();
 
+      // this.context.closePath();
       this.context.stroke();
+
+      // this.context.fill();
+
       this.context.restore();
     }
   };
@@ -164,6 +170,7 @@ class Particle {
 
       this.context.beginPath();
       this.context.strokeStyle = this.color;
+      this.context.fillStyle = this.color;
 
       //top arc
       this.context.arc(cx, cy + d, r, -r90 - rad, -r90 + rad);
@@ -177,8 +184,9 @@ class Particle {
       // left ard
       this.context.arc(cx + d, cy, r, r180 - rad, r180 + rad);
 
-      this.context.closePath();
+      // this.context.closePath();
       this.context.stroke();
+      // this.context.fill();
       this.context.restore();
     }
   };
