@@ -69,7 +69,7 @@ class Frame extends FrameBase {
 
   sketch = ({ render }: { render: () => void }) => {
     // re-render on move movement
-    this.canvas.addEventListener("mousemove", (evt) => {
+    window.addEventListener("mousemove", (evt) => {
       this.mouseEvent = evt;
       render();
     });
@@ -78,8 +78,8 @@ class Frame extends FrameBase {
       context.strokeStyle = "green";
       context.fillStyle = "green";
       context.clearRect(0, 0, width, height);
-      let mouseX: number = width / 2,
-        mouseY: number = height / 2;
+      let mouseX: number = 500,
+        mouseY: number = 500;
 
       if (this.mouseEvent) {
         let { clientX, clientY } = this.mouseEvent;
@@ -120,6 +120,7 @@ class Frame extends FrameBase {
           let theta = atan2(delta.y, delta.x);
           theta += r60 * gravity;
 
+          const deltaThreshold = 50;
           context.save();
           context.beginPath();
           context.translate(currentOffset.x, currentOffset.y);
@@ -127,6 +128,10 @@ class Frame extends FrameBase {
           context.moveTo(0, 0);
           context.lineTo(length, 0);
           context.closePath();
+          if (abs(delta.x) < deltaThreshold && abs(delta.y) < deltaThreshold) {
+            context.fillStyle = "red";
+            context.strokeStyle = "#228B2270";
+          }
           context.stroke();
           context.arc(length, 0, 2, 0, 360);
           context.fill();
