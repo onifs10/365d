@@ -68,6 +68,7 @@ export class FrameBase {
     cy: number;
   };
   protected canvas: HTMLCanvasElement;
+  protected cleanUp: () => void = () => {};
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     const { ctx } = initCanvas(canvas);
@@ -79,6 +80,10 @@ export class FrameBase {
       cy: canvas.height / 2,
     };
   }
+
+  destroy = () => {
+    this.cleanUp();
+  };
 }
 
 export type sketchFunctionProps = {

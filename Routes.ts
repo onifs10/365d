@@ -90,6 +90,12 @@ const ROUTES: DayInfo[] = [
     path: "/014",
     date: "24/12/2021",
   },
+  {
+    day: "015",
+    name: "Gravity",
+    path: "/015",
+    date: "25/12/2021",
+  },
 ];
 
 export default ROUTES;

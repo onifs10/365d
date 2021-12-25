@@ -26,6 +26,10 @@ const Page013: NextPage = () => {
       const frame = new Frame(canvas.current);
       setFrame(frame);
       frame.init();
+
+      return () => {
+        frame.destroy();
+      };
     }
   }, [canvas]);
   return (
@@ -69,10 +73,15 @@ class Frame extends FrameBase {
 
   sketch = ({ render }: { render: () => void }) => {
     // re-render on move movement
-    window.addEventListener("mousemove", (evt) => {
+    const eventFunc = (evt: any) => {
       this.mouseEvent = evt;
       render();
-    });
+    };
+    window.addEventListener("mousemove", eventFunc, true);
+
+    this.cleanUp = () => {
+      window.removeEventListener("mousemove", eventFunc, true);
+    };
 
     return ({ context, width, height, frame }: sketchFunctionProps) => {
       context.strokeStyle = "green";

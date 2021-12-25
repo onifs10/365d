@@ -208,7 +208,6 @@ class Frame extends FrameBase {
         ],
       },
     });
-    this.COG.position.x = 300;
     World.add(this.engine!.world, this.COG!);
   };
 
