@@ -16,10 +16,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h6 className={styles.title}>
           {/* add effect to animate ancor color */}
-          365 days <a href="#">Xploring</a>
-        </h1>
+          365 X
+        </h6>
         <p className={styles.description}>
           Exporing javascript and various libraries
         </p>
