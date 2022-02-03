@@ -40,6 +40,9 @@ const Page009: NextPage = () => {
 
   const handleMouseDown = (evt: MouseEvent<HTMLDivElement>) => {
     setDragging(true);
+    if (box) {
+      box.style.cursor = "grabbing";
+    }
     setStartPos([evt.screenX, evt.screenY]);
   };
   const handleMouseUp = useCallback(
@@ -55,6 +58,9 @@ const Page009: NextPage = () => {
           window.innerHeight - BOX_SIZE
         );
         positionSet({ x: positionX, y: positionY });
+      }
+      if (box) {
+        box.style.cursor = "grab";
       }
     },
     [dragging, postion.x, postion.y, startPosition]
